@@ -7193,6 +7193,7 @@ Snap.plugin(function (Snap, Element, Paper, glob) {
         return arr1.toString() == arr2.toString();
     }
     Element.prototype.equal = function (name, b) {
+        console.log(name, b, eve("snap.util.equal", this, name, b).firstDefined());
         return eve("snap.util.equal", this, name, b).firstDefined();
     };
     eve.on("snap.util.equal", function (name, b) {

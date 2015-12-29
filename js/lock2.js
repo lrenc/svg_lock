@@ -1,5 +1,5 @@
 (function() {
-    
+
     function getOffset(element) {
         var top  = 0;
         var left = 0;
@@ -113,13 +113,14 @@
                         circles
                             .selectAll('circle')[idx - 1]
                             .attr({
-                                stroke: 'rgba(255,255,255,.2)',
-                                'class': 'hovered'
+                                stroke : 'rgba(255,255,255, 1)',
+                                'class': 'hovered',
+                                r      : self.radius
                             })
-                            .animate({
+                            /*.animate({
                                 r: self.radius,
                                 stroke: 'rgba(255,255,255,1)'
-                            }, 100);
+                            }, 300);*/
                         // 加入已划过组
                         path.push(idx);
                         // 已经有点被加入了，有线需要闭合
@@ -130,7 +131,7 @@
                                 stroke: '#fff'
                             });
                         }
-                        line = svg.paper.line(point.x, point.y, x, y).attr({
+                        line = svg/*.paper*/.line(point.x, point.y, x, y).attr({
                             stroke: "rgba(255,255,255,.75)",
                             strokeWidth: 5,
                             'class': 'line'
@@ -147,7 +148,6 @@
                 line.remove();
                 console.log(self.path);
             });
-
 
         },
         // 画圆和圆心
