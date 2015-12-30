@@ -5,19 +5,41 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
 <title>lock-svg</title>
 <link rel="stylesheet" href="css/lock.css">
+<style>
+button {
+    width: 200px;
+    height: 40px;
+    display: block;
+    margin: 10px auto;
+    border: none;
+    outline: none;
+    border-radius: 3px;
+    line-height: 40px;
+    background-color: #b12e2e;
+    color: #fff;
+    font-size: 16px;
+}
+</style>
 </head>
 <body>
 <div class="container">
     <svg id="lock"></svg>
 </div>
-
+<p>
+    <button id="reset">重置</button>
+</p>
 <!-- <script src="js/snap.svg-min.js"></script> -->
 
 <script src="js/mysnap.js"></script>
 <script src="js/lock2.js"></script>
 <script>
 (function() {
-    new Lock(document.getElementById('lock')).init();
+    var lock = new Lock(document.getElementById('lock'));
+    lock.init();
+    // reset
+    document.getElementById('reset').addEventListener('click', function() {
+        lock.reset();
+    }, false);
 })();
 </script>
 </body>

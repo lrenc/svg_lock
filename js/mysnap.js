@@ -31,6 +31,15 @@
         return first;
     }
 
+    function create(obj) {
+        if (Object.create) {
+            return Object.create(obj);
+        }
+        var f = function() {};
+        f.prototype = obj;
+        return new f();
+    }
+
     function slice(from, to, f) {
         return function(arr) {
             var res = arr.slice(from, to);
@@ -70,6 +79,25 @@
         }
         this.node = container;
     }
+    // 类数组
+    Snap.Set = function() {
+        var array = extend(new Array(), {
+            attr: function(opts) {
+                var arr = this;
+                for (var i = 0,l = arr.length; i < l; i ++) {
+                    arr[i].attr(opts);
+                }
+            },
+            // remove
+            remove: function() {
+                var arr = this;
+                for (var i = 0, l = arr.length; i < l; i ++) {
+                    arr[i].remove();
+                }
+            }
+        });
+        return create(array);
+    }
 
     var pt = {
         attr: function(opts) {
@@ -99,7 +127,7 @@
 
         selectAll: function(query) {
             var nodes = this.node.querySelectorAll(query);
-            var res   = [];
+            var res   = Snap.Set();
             for (var i = 0; i < nodes.length; i++) {
                 res.push(new Snap(nodes[i]));
             }
@@ -139,7 +167,10 @@
             return path;
         },
         remove: function() {
-            this.node.parentNode.removeChild(this.node);
+            if (this.node) {
+                this.node.parentNode.removeChild(this.node);
+                this.node = null;
+            }
         },
         
         animate: function(attrs, ms) {

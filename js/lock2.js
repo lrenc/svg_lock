@@ -136,7 +136,6 @@
                             strokeWidth: 5,
                             'class': 'line'
                         });
-
                     }
                 }
             });
@@ -232,12 +231,15 @@
             this
                 .points
                 .selectAll('circle')
-                .arrt({
+                .attr({
                     'class': ''
                 });
             this.svg
                 .selectAll('.line')
                 .remove();
+
+            this.path = [];
+
         }
     };
 
